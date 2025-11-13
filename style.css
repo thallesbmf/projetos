@@ -1,0 +1,205 @@
+/* --- 1. Definição da Paleta e Fontes --- */
+:root {
+    --fundo-escuro: #1a0f2b; /* Roxo bem escuro, quase preto */
+    --azul-eletrico: #00e0ff; /* Ciano/Azul brilhante para destaque */
+    --magenta-acao: #9e46ff;  /* Roxo/Magenta para botões */
+    --magenta-hover: #b470ff; /* Tom mais claro para hover */
+    --branco-texto: #f0f0f0;  /* Branco/Cinza claro para texto */
+}
+
+body {
+    background-color: var(--fundo-escuro);
+    color: var(--branco-texto);
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* --- 2. Estilo da Seção Principal (Hero) --- */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px;
+    min-height: 70vh; /* Aumentamos a altura para a imagem aparecer mais */
+    position: relative; /* Importante para o overlay */
+
+    /* --- ESTILOS PARA A IMAGEM DE FUNDO --- */
+    background-image: url('curso-teclado.png'); /* Nome do seu arquivo de imagem */
+    background-size: cover; /* Faz a imagem cobrir toda a área */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    /* background-attachment: fixed; */ /* Opcional: faz a imagem de fundo ficar "parada" enquanto o conteúdo rola */
+}
+
+/* --- ADICIONA UM OVERLAY ESCURO SOBRE A IMAGEM --- */
+/* Isso ajuda o texto branco a se destacar e dá aquele tom "noturno/premium" */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Cor preta com 60% de opacidade */
+    /* Podemos usar uma cor mais próxima do roxo também: */
+    /* background-color: rgba(26, 15, 43, 0.7); */ /* Exemplo com o roxo do --fundo-escuro */
+    z-index: 1; /* Garante que o overlay fique abaixo do conteúdo */
+}
+
+/* Garante que o conteúdo do texto fique acima do overlay */
+.hero-content {
+    position: relative;
+    z-index: 2; /* Acima do overlay */
+    max-width: 800px; /* Limita a largura do texto para melhor leitura */
+}
+
+
+.hero h1 {
+    font-size: 2.5rem; /* 40px */
+    font-weight: 900;
+    margin-bottom: 0;
+}
+
+/* O destaque em azul elétrico */
+.hero .highlight {
+    color: var(--azul-eletrico);
+}
+
+.hero h2 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    color: var(--branco-texto);
+}
+
+.hero p {
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 15px auto 30px auto; /* Centraliza */
+}
+
+/* --- 3. O Botão de Ação (CTA) e Animação --- */
+.cta-button {
+    background-color: var(--magenta-acao);
+    color: var(--branco-texto);
+    text-decoration: none; /* Tira o sublinhado do link */
+    padding: 15px 35px;
+    border-radius: 50px; /* Arredondado */
+    font-weight: 700;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* A ANIMAÇÃO de Hover (Passar o mouse) */
+.cta-button:hover {
+    background-color: var(--magenta-hover);
+    transform: scale(1.05); /* Botão "cresce" um pouco */
+    box-shadow: 0 0 20px var(--magenta-hover); /* Efeito de brilho */
+}
+
+/* --- 4. A Vitrine (Cards dos Cursos) --- */
+.vitrine-cursos {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.vitrine-cursos h3 {
+    font-size: 2rem;
+    color: var(--azul-eletrico);
+    margin-bottom: 40px;
+}
+
+.cursos-grid {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem a linha em telas menores */
+    justify-content: center;
+    gap: 30px; /* Espaço entre os cards */
+}
+
+.curso-card {
+    background-color: #2a1a45; /* Um roxo um pouco mais claro que o fundo */
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+
+.curso-card:hover {
+    transform: translateY(-10px); /* Card "levanta" ao passar o mouse */
+}
+
+.curso-card img {
+    width: 100%;
+    height: 180px; /* Altura fixa para a imagem */
+    object-fit: cover; /* Garante que a imagem cubra o espaço */
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.cta-button-card {
+    display: inline-block; /* Para o botão ocupar o espaço certo */
+    margin-top: 15px;
+    background-color: var(--azul-eletrico);
+    color: var(--fundo-escuro);
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.cta-button-card:hover {
+    background-color: var(--branco-texto);
+    transform: scale(1.05);
+}
+
+
+/* --- 5. Animação do Ticker (Faixa rolando) --- */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--magenta-acao);
+    padding: 10px 0;
+    position: relative; 
+    bottom: 0;
+    left: 0;
+}
+
+.ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-anim 20s linear infinite;
+}
+
+.ticker span {
+    display: inline-block;
+    padding: 0 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--branco-texto);
+}
+
+@keyframes ticker-anim {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* --- Media Queries para Responsividade --- */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero h2 {
+        font-size: 1.2rem;
+    }
+    .ticker span {
+        font-size: 1rem;
+    }
+}
